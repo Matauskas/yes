@@ -1,0 +1,81 @@
+﻿@model Org.Ktu.Isk.P175B602.Autonuoma.Models.Viesbutis.ViesbutisCE
+
+@* this will also be used as page title in main layout *@
+@{ ViewData["title"] = "Viesbucio sukūrimas"; }
+
+@* content header *@
+<div class="main-content-header">
+	<span class="title">@ViewData["title"]</span>
+	<span class="actions">
+		<a 
+			href="@Url.Action("Index")" 
+			class="btn btn-outline-primary btn-sm"
+		>
+			<i class="fa-solid fa-angles-left"></i> Atgal į sarašą
+		</a>
+	</span>
+</div>
+
+@* content itself *@
+<div class="main-content-ced">
+@using( Html.BeginForm(FormMethod.Post, new { @class="entity-ce" }) )
+{
+	@Html.AntiForgeryToken()
+	
+	@Html.ValidationSummary(true, "", new { @class = "text-danger" })
+
+	<fieldset>
+		<legend class="text-center">Viesbutis</legend>
+		<div class="form-group">
+			@Html.LabelFor(m => m.Viesbutis.Pavadinimas)
+			@Html.EditorFor(m => m.Viesbutis.Pavadinimas)
+			@Html.ValidationMessageFor(m => m.Viesbutis.Pavadinimas, "")
+		</div>
+
+		<div class="form-group">
+			@Html.LabelFor(m => m.Viesbutis.Adresas)
+			@Html.EditorFor(m => m.Viesbutis.Adresas)
+			@Html.ValidationMessageFor(m => m.Viesbutis.Adresas, "")
+		</div>
+
+		<div class="form-group">
+			@Html.LabelFor(m => m.Viesbutis.KainaUzNakti)
+			@Html.EditorFor(m => m.Viesbutis.KainaUzNakti)
+			@Html.ValidationMessageFor(m => m.Viesbutis.KainaUzNakti, "")
+		</div>
+
+		<div class="form-group">
+			@Html.LabelFor(m => m.Viesbutis.Pusryciai)
+			@Html.EditorFor(m => m.Viesbutis.Pusryciai)
+			@Html.ValidationMessageFor(m => m.Viesbutis.Pusryciai, "")
+		</div>
+
+
+	</fieldset>
+	<fieldset>
+			<legend class="text-center">Viesbutis Ivertinimas</legend>
+		<div class="form-group">
+			@Html.LabelFor(m => m.Viesbutis.Ivertinimas)
+			@Html.DropDownListFor(m => m.Viesbutis.Ivertinimas, Model.Lists.Ivertinimas, (string)ViewData["none-chosen"])
+			@Html.ValidationMessageFor(m => m.Viesbutis.Ivertinimas, "")
+		</div>
+	</fieldset>
+
+	<div class="container-fluid d-flex d-row justify-content-end">
+		<button name="save" value="1" class="btn btn-success"><i class="fa-solid fa-floppy-disk"></i> Išsaugoti</button>
+	</div>
+}
+</div>
+
+@* content footer *@
+<div class="main-content-footer">
+	<span class="title"></span>
+	<span class="actions">
+		<a 
+			href="@Url.Action("Index")" 
+			class="btn btn-outline-primary btn-sm"
+		>
+			<i class="fa-solid fa-angles-left"></i> Atgal į sarašą
+		</a>
+	</span>
+</div>

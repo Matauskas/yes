@@ -1,0 +1,98 @@
+﻿@model Org.Ktu.Isk.P175B602.Autonuoma.Models.Keliones.KelionesCE
+
+@* this will also be used as page title in main layout *@
+@{ ViewData["title"] = "Keliones redagavimas"; }
+
+@* content header *@
+<div class="main-content-header">
+	<span class="title">@ViewData["title"]</span>
+	<span class="actions">
+		<a 
+			href="@Url.Action("Index")" 
+			class="btn btn-outline-primary btn-sm"
+		>
+			<i class="fa-solid fa-angles-left"></i> Atgal į sarašą
+		</a>
+	</span>
+</div>
+
+@* content itself *@
+<div class="main-content-ced">
+@using( Html.BeginForm(FormMethod.Post, new { @class="entity-ce" }) )
+{
+	@Html.AntiForgeryToken()
+	
+	@Html.ValidationSummary(true, "", new { @class = "text-danger" })
+	
+	@* add hidden form fields for non-visible properties, otherwise they will get lost in code that handles button presses *@
+	@Html.HiddenFor(m => m.Keliones.Id)
+
+	<fieldset>
+		<legend class="text-center">Kelione</legend>
+		<div class="form-group">
+			@Html.LabelFor(m => m.Keliones.Id)
+			@Html.EditorFor(m => m.Keliones.Id)
+			@Html.ValidationMessageFor(m => m.Keliones.Id, "")
+		</div>
+
+		<div class="form-group">
+			@Html.LabelFor(m => m.Keliones.Dienos)
+			@Html.EditorFor(m => m.Keliones.Dienos)
+			@Html.ValidationMessageFor(m => m.Keliones.Dienos, "")
+		</div>
+		<div class="form-group">
+			@Html.LabelFor(m => m.Keliones.Pradzia)
+			@Html.TextBoxFor(m => m.Keliones.Pradzia, "{0:yyyy-MM-dd}", new { @class = "date-picker" })
+			@Html.ValidationMessageFor(m => m.Keliones.Pradzia, "")
+		</div>
+		<div class="form-group">
+			@Html.LabelFor(m => m.Keliones.Pabaiga)
+			@Html.TextBoxFor(m => m.Keliones.Pabaiga, "{0:yyyy-MM-dd}", new { @class = "date-picker" })
+			@Html.ValidationMessageFor(m => m.Keliones.Pabaiga, "")
+		</div>
+		<div class="form-group">
+			@Html.LabelFor(m => m.Keliones.Kaina)
+			@Html.EditorFor(m =>  m.Keliones.Kaina)
+			@Html.ValidationMessageFor(m =>  m.Keliones.Kaina, "")
+		</div>
+		<div class="form-group">
+			@Html.LabelFor(m => m.Keliones.fkTipas)
+			@Html.DropDownListFor(m =>  m.Keliones.fkTipas, Model.Lists.Tipai, (string)ViewData["none-chosen"])
+			@Html.ValidationMessageFor(m =>  m.Keliones.fkTipas, "")
+		</div>
+	</fieldset>
+	<fieldset>
+			<legend class="text-center">Viesbutis</legend>
+		<div class="form-group">
+			@Html.LabelFor(m => m.Keliones.fkViesbutis)
+			@Html.DropDownListFor(m =>  m.Keliones.fkViesbutis, Model.Lists.Viesbuciai, (string)ViewData["none-chosen"])
+			@Html.ValidationMessageFor(m =>  m.Keliones.fkViesbutis, "")
+		</div>
+	</fieldset>
+	<fieldset>
+			<legend class="text-center">Salis</legend>
+		<div class="form-group">
+			@Html.LabelFor(m => m.Keliones.fkSalis)
+			@Html.DropDownListFor(m =>  m.Keliones.fkSalis, Model.Lists.Salys, (string)ViewData["none-chosen"])
+			@Html.ValidationMessageFor(m =>  m.Keliones.fkSalis, "")
+		</div>
+	</fieldset>
+
+	<div class="container-fluid d-flex d-row justify-content-end">
+		<button name="save" value="1" class="btn btn-success"><i class="fa-solid fa-floppy-disk"></i> Išsaugoti</button>
+	</div>
+}
+</div>
+
+@* content footer *@
+<div class="main-content-footer">
+	<span class="title"></span>
+	<span class="actions">
+		<a 
+			href="@Url.Action("Index")" 
+			class="btn btn-outline-primary btn-sm"
+		>
+			<i class="fa-solid fa-angles-left"></i> Atgal į sarašą
+		</a>
+	</span>
+</div>
